@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<html>
 	<?php
 	if (isset($this->session->userdata['logged_in'])) {
 		header("location: ".base_url()."index.php/login/user_login_process");
 	}
 ?>
-	<head>
 		<title>Registro</title>
 	</head>
 

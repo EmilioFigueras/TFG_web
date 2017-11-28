@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<html>
 	<?php
 	if (isset($this->session->userdata['logged_in'])) {
 		header("location: ".base_url()."index.php/login/user_login_process");
 	}
 ?>
-	<head>
 		<title>Login Form</title>
 	</head>
 	
@@ -48,7 +45,7 @@
 							</div>
 							<div class="log-input">
 								<div class="log-input-left">
-								   <input type="password" class="lock" name="password" type="password" value="password" 
+								   <input type="password" class="lock" name="password" value="password" 
 								   onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
 								</div>
 								<div class="clearfix"> </div>

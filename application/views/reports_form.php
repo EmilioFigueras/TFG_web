@@ -19,7 +19,7 @@
 
 					?>
 					<div class="xs tabls">
-						<div class="bs-example4" data-example-id="contextual-table">
+						<div class="bs-example4 table-responsive" data-example-id="contextual-table">
 						<table class="table">
 						  <thead>
 							<tr>

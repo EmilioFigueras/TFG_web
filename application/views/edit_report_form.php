@@ -39,7 +39,7 @@
 			</ul>
 
 			<br>
-			<h3 class="blank1">Crear informe: </h3>
+			<h3 class="blank1">Editar informe: </h3>
 
 			<div class="tab-content">
 			<div class="tab-pane active" id="horizontal-form">

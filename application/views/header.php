@@ -29,4 +29,3 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</script>
 	<!--//end-animate-->
 	<link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-</head>

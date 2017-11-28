@@ -1,4 +1,3 @@
-<head>
 <title>Error 404 - Page Not Found</title>
 </head>
    
@@ -9,7 +8,7 @@
 
 			<!--logo and iconic logo start-->
 			<div class="logo">
-				<h1><a href="<?=base_url()?>index.php/login">Easy <span>Admin</span></a></h1>
+				<h1><a href="<?=base_url()?>index.php/login">WID <span>Panel</span></a></h1>
 			</div>
 			<div class="logo-icon text-center">
 				<a href="<?=base_url()?>index.php/login"><i class="lnr lnr-home"></i> </a>
