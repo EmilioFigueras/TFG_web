@@ -134,25 +134,25 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-			
+				$this->personal_db = $this->load->database('personal', TRUE);
+
 
 				if($valued){ //Comentarios valorados
-					$this->db->select('c.*, p.*, a.personalRating');
-					$this->db->from($new_db.'.comments as c');
-					$this->db->join($new_db.'.products as p', 'c.idProduct = p.id', 'inner');
-					$this->db->join($new_db.'.analysis as a', 'c.autoid = a.idComment', 'inner');
-					$this->db->limit(10, $offset);
+					$this->personal_db->select('c.*, p.*, a.personalRating');
+					$this->personal_db->from('comments as c');
+					$this->personal_db->join('products as p', 'c.idProduct = p.id', 'inner');
+					$this->personal_db->join('analysis as a', 'c.autoid = a.idComment', 'inner');
+					$this->personal_db->limit(10, $offset);
 				}else{ //Comentarios no valorados
-					$this->db->select('c.*, p.*, a.personalRating');
-					$this->db->from($new_db.'.comments as c');
-					$this->db->join($new_db.'.products as p', 'c.idProduct = p.id', 'inner');
-					$this->db->join($new_db.'.analysis as a', 'c.autoid = a.idComment', 'left');
-					$this->db->where('a.personalRating is null');
-					$this->db->limit(10);
+					$this->personal_db->select('c.*, p.*, a.personalRating');
+					$this->personal_db->from('comments as c');
+					$this->personal_db->join('products as p', 'c.idProduct = p.id', 'inner');
+					$this->personal_db->join('analysis as a', 'c.autoid = a.idComment', 'left');
+					$this->personal_db->where('a.personalRating is null');
+					$this->personal_db->limit(10);
 				}
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 				if($query->num_rows() > 0)
 					return $query->result();
 				else 
@@ -167,27 +167,27 @@
 			if(empty($this->session->userdata['logged_in']['name_db']))
 				return false;
 			else{
-				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				//Accedemos a la base de datos correcta
+				$this->personal_db = $this->load->database('personal', TRUE);
 
 				//Comprobamos si el comentario ya ha sido valorado
 				$condition = "idComment =" . "'" . $data['idComment'] . "'";
-				$this->db->select('*');
-				$this->db->from($new_db.'.analysis');
-				$this->db->where($condition);
-				$this->db->limit(1);
-				$query = $this->db->get();
+				$this->personal_db->select('*');
+				$this->personal_db->from('analysis');
+				$this->personal_db->where($condition);
+				$this->personal_db->limit(1);
+				$query = $this->personal_db->get();
 
 				//Si ya existe pues editamos
 				if ($query->num_rows() == 1){
-					$this->db->where('idComment', $data['idComment']);
-					$this->db->update($new_db.'.analysis', $data);
+					$this->personal_db->where('idComment', $data['idComment']);
+					$this->personal_db->update('analysis', $data);
 					return "Update";
 
 				}else{ //Si no existe pues insertamos
 					//Insertamos en la base de datos
-					$this->db->insert($new_db.'.analysis', $data);
-					if ($this->db->affected_rows() > 0)
+					$this->personal_db->insert('analysis', $data);
+					if ($this->personal_db->affected_rows() > 0)
 						return "Insert";
 					else 
 						return false;
@@ -204,10 +204,10 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$structure['comments'] = $this->db->list_fields($new_db.'.comments');
-				$structure['products'] = $this->db->list_fields($new_db.'.products');
+				$structure['comments'] = $this->personal_db->list_fields('comments');
+				$structure['products'] = $this->personal_db->list_fields('products');
 
 				if(!empty($structure['comments']) && !empty($structure['products'])){
 					return $structure;
@@ -226,14 +226,15 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-				$this->db->select('c.*, p.*, a.personalRating');
-				$this->db->from($new_db.'.comments as c');
-				$this->db->join($new_db.'.products as p', 'c.idProduct = p.id', 'inner');
-				$this->db->join($new_db.'.analysis as a', 'c.autoid = a.idComment', 'left');
-				$this->db->where($conditions);
+				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$query = $this->db->get();
+				$this->personal_db->select('c.*, p.*, a.personalRating');
+				$this->personal_db->from('comments as c');
+				$this->personal_db->join('products as p', 'c.idProduct = p.id', 'inner');
+				$this->personal_db->join('analysis as a', 'c.autoid = a.idComment', 'left');
+				$this->personal_db->where($conditions);
+
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
@@ -251,11 +252,12 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-				$this->db->select('*');
-				$this->db->from($new_db.'.reports');
+				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$query = $this->db->get();
+				$this->personal_db->select('*');
+				$this->personal_db->from('reports');
+
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
@@ -272,12 +274,13 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-				$this->db->select('*');
-				$this->db->from($new_db.'.reports');
-				$this->db->where("autoid = '".$id."'");
+				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$query = $this->db->get();
+				$this->personal_db->select('*');
+				$this->personal_db->from('reports');
+				$this->personal_db->where("autoid = '".$id."'");
+
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
@@ -294,12 +297,11 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-
+				$this->personal_db = $this->load->database('personal', TRUE);
 				
 				//Insertamos en la base de datos
-				$this->db->insert($new_db.'.reports', $data);
-				if ($this->db->affected_rows() > 0)
+				$this->personal_db->insert('reports', $data);
+				if ($this->personal_db->affected_rows() > 0)
 					return TRUE;
 				else 
 					return false;
@@ -313,21 +315,20 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-
+				$this->personal_db = $this->load->database('personal', TRUE);
 
 				//Comprobamos si el nombre de la base de datos existe
-				$this->db->select('*');
-				$this->db->from($new_db.'.reports');
-				$this->db->where("autoid = '".$id."'");
+				$this->personal_db->select('*');
+				$this->personal_db->from('reports');
+				$this->personal_db->where("autoid = '".$id."'");
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 
 				//Si existe el id
 				if ($query->num_rows() == 1) {
-					$this->db->where('autoid', $id);
-					$this->db->update($new_db.'.reports', $data);
-					if ($this->db->affected_rows() > 0)
+					$this->personal_db->where('autoid', $id);
+					$this->personal_db->update('reports', $data);
+					if ($this->personal_db->affected_rows() > 0)
 						return true;
 					else 
 						return false;
@@ -342,21 +343,20 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
-
+				$this->personal_db = $this->load->database('personal', TRUE);
 
 				//Comprobamos si el nombre de la base de datos existe
-				$this->db->select('*');
-				$this->db->from($new_db.'.reports');
-				$this->db->where("autoid = '".$id."'");
+				$this->personal_db->select('*');
+				$this->personal_db->from('reports');
+				$this->personal_db->where("autoid = '".$id."'");
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 
 				//Si existe el id
 				if ($query->num_rows() == 1) {
-					$this->db->where('autoid', $id);
-					$this->db->delete($new_db.'.reports');
-					if ($this->db->affected_rows() > 0)
+					$this->personal_db->where('autoid', $id);
+					$this->personal_db->delete('reports');
+					if ($this->personal_db->affected_rows() > 0)
 						return true;
 					else 
 						return false;
@@ -372,21 +372,22 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$this->db->select($select);
-				$this->db->from($new_db.'.comments as c');
-				$this->db->join($new_db.'.products as p', 'c.idProduct = p.id', 'left');
-				$this->db->join($new_db.'.analysis as a', 'c.autoid = a.idComment', 'left');
+				$this->personal_db->select($select);
+				$this->personal_db->from('comments as c');
+				$this->personal_db->join('products as p', 'c.idProduct = p.id', 'left');
+				$this->personal_db->join('analysis as a', 'c.autoid = a.idComment', 'left');
 				if(!empty($groupby)){
-					$this->db->group_by($groupby);
-					$this->db->having($where);
+					$this->personal_db->group_by($groupby);
+					if(!empty($where))
+						$this->personal_db->having($where);
 				}else if(!empty($where))
-					$this->db->where($where);
+					$this->personal_db->where($where);
 				if(!empty($orderby))
-					$this->db->order_by($orderby);
+					$this->personal_db->order_by($orderby);
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();

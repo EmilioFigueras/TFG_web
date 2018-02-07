@@ -8,9 +8,9 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
 				$this->db->select('*');
-				$this->db->from($new_db.'.reports');
+				$this->db->from('reports');
 				$this->db->where('active', '1');
 				$this->db->order_by('title', 'ASC');
 
@@ -31,9 +31,9 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
 				$this->db->select('*');
-				$this->db->from($new_db.'.reports');
+				$this->db->from('reports');
 				$this->db->where("autoid = '".$id."'");
 
 				$query = $this->db->get();
@@ -53,12 +53,12 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
 
 				$this->db->select($select);
-				$this->db->from($new_db.'.comments as c');
-				$this->db->join($new_db.'.products as p', 'c.idProduct = p.id', 'left');
-				$this->db->join($new_db.'.analysis as a', 'c.autoid = a.idComment', 'left');
+				$this->db->from('comments as c');
+				$this->db->join('products as p', 'c.idProduct = p.id', 'left');
+				$this->db->join('analysis as a', 'c.autoid = a.idComment', 'left');
 				if(!empty($groupby)){
 					$this->db->group_by($groupby);
 					$this->db->having($where);
@@ -107,10 +107,10 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$structure['comments'] = $this->db->list_fields($new_db.'.comments');
-				$structure['products'] = $this->db->list_fields($new_db.'.products');
+				$structure['comments'] = $this->db->list_fields('comments');
+				$structure['products'] = $this->db->list_fields('products');
 
 				if(!empty($structure['comments']) && !empty($structure['products'])){
 					return $structure;
@@ -129,11 +129,12 @@
 				return false;
 			else{
 				//Accedemos a la base de datos correcta 
-				$new_db =  $this->session->userdata['logged_in']['name_db'];
+				$this->personal_db = $this->load->database('personal', TRUE);
+
 				$this->db->select('c.*, p.*, a.personalRating');
-				$this->db->from($new_db.'.comments as c');
-				$this->db->join($new_db.'.products as p', 'c.idProduct = p.id', 'inner');
-				$this->db->join($new_db.'.analysis as a', 'c.autoid = a.idComment', 'left');
+				$this->db->from('comments as c');
+				$this->db->join('products as p', 'c.idProduct = p.id', 'inner');
+				$this->db->join('analysis as a', 'c.autoid = a.idComment', 'left');
 				$this->db->where($conditions);
 
 				$query = $this->db->get();

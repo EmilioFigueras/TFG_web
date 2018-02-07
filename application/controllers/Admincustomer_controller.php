@@ -566,6 +566,7 @@ class Admincustomer_controller extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	//Crear un nuevo informe
 	public function new_report(){
 		//Validamos los datos
 		$this->form_validation->set_rules('title_report', 'Title_report', 'trim|required|xss_clean');

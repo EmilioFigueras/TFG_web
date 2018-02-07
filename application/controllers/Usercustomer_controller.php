@@ -120,13 +120,15 @@ class Usercustomer_controller extends CI_Controller {
 			//configuracion para gmail
 			$configMail = array(
 				'protocol' => 'smtp',
-				'smtp_host' => 'ssl://in-v3.mailjet.com',
+				//'smtp_host' => 'ssl://in-v3.mailjet.com',
+				'smtp_host' => 'ssl://smtp.gmail.com',
 				'smtp_port' => 465,
-				'smtp_user' => '65edf6fe937597e09afb14b41fd92a14',
-				'smtp_pass' => 'b5b2823a87a192c36f2d4e3d493dc1cb',
+				'smtp_user' => 'widsoporte@gmail.com',//'65edf6fe937597e09afb14b41fd92a14',
+				'smtp_pass' => 'cwNvyt6l',//'b5b2823a87a192c36f2d4e3d493dc1cb',
 				'mailtype' => 'html',
 				'charset' => 'utf-8',
-				'newline' => "\r\n"
+				'newline' => "\r\n",
+				'wordwrap' => TRUE
 			);
 
 			//Enviamos el email
@@ -148,7 +150,7 @@ class Usercustomer_controller extends CI_Controller {
 
 				$to = $emails; 
 
-				$from = 'figmare@hotmail.com';
+				$from = 'widsoporte@gmail.com';
 				$asunto = "Incidencia con el informe ".$id;
 				$cuerpo = ' 
 					<html> 

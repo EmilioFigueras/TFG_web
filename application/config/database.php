@@ -72,6 +72,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
+$ci = get_instance();
+ if (!isset($ci->session->userdata['logged_in']['name_db'])){
+      $personal_db = 'none';
+ }else{
+ 	$personal_db = $ci->session->userdata['logged_in']['name_db'];
+ }
 
 $db['default'] = array(
 	'dsn'	=> '',
@@ -79,6 +85,28 @@ $db['default'] = array(
 	'username' => 'admin',
 	'password' => 'admin',
 	'database' => 'tfg_admin',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['personal'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'admin',
+	'password' => 'admin',
+	'database' => $personal_db,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
