@@ -490,8 +490,8 @@ class Admincustomer_controller extends CI_Controller {
 		$this->form_validation->set_rules('description_report', 'Description_report', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('type_report', 'Type_report', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('active_report', 'Active_report', 'trim|xss_clean');
-		$this->form_validation->set_rules('query_report_select', 'Query_report_select', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('query_report_where', 'Query_report_where', 'trim|xss_clean');
+		$this->form_validation->set_rules('query_report_select', 'Query_report_select', 'trim|required');
+		$this->form_validation->set_rules('query_report_where', 'Query_report_where', 'trim');
 		$this->form_validation->set_rules('query_report_groupby_active', 'Query_report_groupby_active', 'trim|xss_clean');
 		$this->form_validation->set_rules('query_report_groupby', 'Query_report_groupby', 'trim|xss_clean');
 		$this->form_validation->set_rules('query_report_orderby_active', 'Query_report_orderby_active', 'trim|xss_clean');

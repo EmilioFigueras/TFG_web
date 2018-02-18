@@ -9,12 +9,12 @@
 			else{
 				//Accedemos a la base de datos correcta 
 				$this->personal_db = $this->load->database('personal', TRUE);
-				$this->db->select('*');
-				$this->db->from('reports');
-				$this->db->where('active', '1');
-				$this->db->order_by('title', 'ASC');
+				$this->personal_db->select('*');
+				$this->personal_db->from('reports');
+				$this->personal_db->where('active', '1');
+				$this->personal_db->order_by('title', 'ASC');
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
@@ -32,11 +32,11 @@
 			else{
 				//Accedemos a la base de datos correcta 
 				$this->personal_db = $this->load->database('personal', TRUE);
-				$this->db->select('*');
-				$this->db->from('reports');
-				$this->db->where("autoid = '".$id."'");
+				$this->personal_db->select('*');
+				$this->personal_db->from('reports');
+				$this->personal_db->where("autoid = '".$id."'");
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
@@ -55,19 +55,21 @@
 				//Accedemos a la base de datos correcta 
 				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$this->db->select($select);
-				$this->db->from('comments as c');
-				$this->db->join('products as p', 'c.idProduct = p.id', 'left');
-				$this->db->join('analysis as a', 'c.autoid = a.idComment', 'left');
-				if(!empty($groupby)){
-					$this->db->group_by($groupby);
-					$this->db->having($where);
-				}else if(!empty($where))
-					$this->db->where($where);
-				if(!empty($orderby))
-					$this->db->order_by($orderby);
+				$this->personal_db->select($select);
+				$this->personal_db->from('comments as c');
+				$this->personal_db->join('products as p', 'c.idProduct = p.id', 'left');
+				$this->personal_db->join('analysis as a', 'c.autoid = a.idComment', 'left');
 
-				$query = $this->db->get();
+				if(!empty($groupby)){
+					$this->personal_db->group_by($groupby);
+					if(!empty($where))
+						$this->personal_db->having($where);
+				}else if(!empty($where))
+					$this->personal_db->where($where);
+				if(!empty($orderby))
+					$this->personal_db->order_by($orderby);
+
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
@@ -109,8 +111,8 @@
 				//Accedemos a la base de datos correcta 
 				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$structure['comments'] = $this->db->list_fields('comments');
-				$structure['products'] = $this->db->list_fields('products');
+				$structure['comments'] = $this->personal_db->list_fields('comments');
+				$structure['products'] = $this->personal_db->list_fields('products');
 
 				if(!empty($structure['comments']) && !empty($structure['products'])){
 					return $structure;
@@ -131,13 +133,13 @@
 				//Accedemos a la base de datos correcta 
 				$this->personal_db = $this->load->database('personal', TRUE);
 
-				$this->db->select('c.*, p.*, a.personalRating');
-				$this->db->from('comments as c');
-				$this->db->join('products as p', 'c.idProduct = p.id', 'inner');
-				$this->db->join('analysis as a', 'c.autoid = a.idComment', 'left');
-				$this->db->where($conditions);
+				$this->personal_db->select('c.*, p.*, a.personalRating');
+				$this->personal_db->from('comments as c');
+				$this->personal_db->join('products as p', 'c.idProduct = p.id', 'inner');
+				$this->personal_db->join('analysis as a', 'c.autoid = a.idComment', 'left');
+				$this->personal_db->where($conditions);
 
-				$query = $this->db->get();
+				$query = $this->personal_db->get();
 				//var_dump($query->result());die;
 				if($query->num_rows() > 0)
 					return $query->result();
