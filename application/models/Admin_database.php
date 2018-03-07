@@ -30,7 +30,16 @@
 		}
 
 		//Activa a un usuario
-		public function activate_insert($data){
+		public function activate_insert($data, $password){
+			//Creamos la base de datos
+			$query_createdb = "CREATE DATABASE ".$data['name_db']." CHARACTER SET utf8 COLLATE utf8_general_ci;";
+			$this->db->query($query_createdb);
+			$query_createuser = "CREATE USER '".$data['name_db']."_user'@'localhost' identified by '".$password."';";
+			$this->db->query($query_createuser);
+			$query_grant = "GRANT ALL PRIVILEGES ON ".$data['name_db'].".* TO ".$data['name_db']."_user@localhost;";
+			$this->db->query($query_grant);
+
+
 			//Comprobamos si el nombre de la base de datos existe
 			$condition = "name_db =" . "'" . $data['name_db'] . "'";
 			$this->db->select('*');

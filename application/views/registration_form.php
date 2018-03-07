@@ -14,6 +14,9 @@
 					if(!empty($message_display)){
 						echo "<div class='alert alert-success' role='alert'>".$message_display."</div>";
 					}
+					if(!empty($msg_db)){
+						echo "<div class='alert alert-danger' role='alert'>".$msg_db."</div>";
+					}
 
 					?>
 				<div class="graphs">

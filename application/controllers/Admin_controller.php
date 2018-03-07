@@ -41,7 +41,8 @@ class Admin_controller extends CI_Controller {
 				'name_db' => $this->input->post('database_name'),
 				'active' => '1'
 				);
-			$result = $this->admin_database->activate_insert($data);
+			$password = substr(md5(uniqid()), 0, 10); //Password aleatoria
+			$result = $this->admin_database->activate_insert($data, $password);
 			if(!$result){
 				$data['inactive_admin_client_users'] = $this->admin_database->inactive_admin_client_users();
 				$data['msg_db'] = "¡ERROR!: Nombre de la base de datos repetido.";
@@ -51,6 +52,51 @@ class Admin_controller extends CI_Controller {
 				$this->load->view('admin_page', $data);
 				$this->load->view('footer');
 			}else{
+				//Enviamos un email con la contraseña
+				//cargamos la libreria email de ci
+				$this->load->library("email");
+
+				//configuracion para gmail
+				$configMail = array(
+					'protocol' => 'smtp',
+					//'smtp_host' => 'ssl://in-v3.mailjet.com',
+					'smtp_host' => 'ssl://smtp.gmail.com',
+					'smtp_port' => 465,
+					'smtp_user' => 'widsoporte@gmail.com',//'65edf6fe937597e09afb14b41fd92a14',
+					'smtp_pass' => 'cwNvyt6l',//'b5b2823a87a192c36f2d4e3d493dc1cb',
+					'mailtype' => 'html',
+					'charset' => 'utf-8',
+					'newline' => "\r\n",
+					'wordwrap' => TRUE
+				);
+
+				//Enviamos un email con la nueva contraseña 
+				$to = 'widsoporte@gmail.com';
+				$from = 'widsoporte@gmail.com';
+				$asunto = "Datos de ".$data['name_db'];
+				$cuerpo = " 
+					<html> 
+					<head> 
+					   <title>Se ha activado la base de datos ".$data['name_db']."</title> 
+					</head> 
+					<body> 
+					<h1>La base de datos ha sido activada</h1> 
+					<p> 
+					<b>El nombre de usuario es ".$data['name_db']."_user y la contraseña es ".$password.".
+					</p> 
+					</body> 
+					</html> 
+					";
+
+				$this->email->initialize($configMail);
+				$this->email->from($from);
+				$this->email->to($to);
+				$this->email->subject($asunto);
+				$this->email->message($cuerpo);
+				$this->email->send();
+
+
+
 				$data['inactive_admin_client_users'] = $this->admin_database->inactive_admin_client_users();
 				$data['msg_ok'] = "¡BIEN HECHO!: El usuario ha sido activado correctamente.";
 
@@ -74,12 +120,13 @@ class Admin_controller extends CI_Controller {
 	public function new_admin_registration(){
 		//Validamos usuario y contraseña
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]');
 		if ($this->form_validation->run() == FALSE) {
+			$data['msg_db'] = 'Error en el formulario';
 			$this->load->view('header');
 			$this->load->view('admin_bars');
-			$this->load->view('admin_registration_form');
+			$this->load->view('admin_registration_form', $data);
 			$this->load->view('footer');
 		} else {
 			$data = array(
@@ -197,9 +244,15 @@ class Admin_controller extends CI_Controller {
 	//Modificar el password de un usuario
 	public function edit_password(){
 		$this->form_validation->set_rules('id', 'Id', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]');
 		if ($this->form_validation->run() == FALSE) {
-			redirect('login', 'refresh');
+				$data['inactive_admin_client_users'] = $this->admin_database->inactive_admin_client_users();
+				$data['msg_db'] = "Error en el formulario.";
+
+				$this->load->view('header');
+				$this->load->view('admin_bars');
+				$this->load->view('admin_page', $data);
+				$this->load->view('footer');
 		}
 		else{
 			$data = array(

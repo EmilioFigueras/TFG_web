@@ -138,12 +138,13 @@ class Login extends CI_Controller {
 	public function new_user_registration(){
 		//Validamos usuario y contraseña
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 		$this->form_validation->set_rules('customer', 'Customer', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]');
 		if ($this->form_validation->run() == FALSE) {
+			$data['msg_db'] = 'Error en el formulario';
 			$this->load->view('header');
-			$this->load->view('registration_form');
+			$this->load->view('registration_form', $data);
 			$this->load->view('footer');
 		} else {
 			$data = array(
@@ -202,7 +203,7 @@ class Login extends CI_Controller {
 				$this->load->view('login_form', $data);
 				$this->load->view('footer');
 			} else {
-				$data['message_display'] = 'Nombre de usuario erróneo';
+				$data['msg_db'] = 'Nombre de usuario erróneo';
 				$this->load->view('header');
 				$this->load->view('registration_form', $data);
 				$this->load->view('footer');
@@ -370,10 +371,29 @@ class Login extends CI_Controller {
 	//Modificar el password de un usuario
 	public function edit_password(){
 		$this->form_validation->set_rules('id', 'Id', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password2', 'Password2', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]');
+		$this->form_validation->set_rules('password2', 'Password2', 'trim|required|xss_clean|min_length[6]');
 		if ($this->form_validation->run() == FALSE) {
-			redirect('login', 'refresh');
+			$data['msg_db'] = "Error en el formulario.";
+
+			$this->load->view('header');
+			switch($this->session->userdata['logged_in']['role']){
+				case 'admin':{
+					$this->load->view('admin_bars');
+					break;
+				};
+				case 'admin_customer':{
+					$this->load->view('admin_customer_bars'); 
+					break;
+				};
+				case 'user_customer':{
+					$this->load->view('user_customer_bars');
+					break;
+				};
+			
+			}
+			$this->load->view('settings', $data);
+			$this->load->view('footer');
 		}
 		else{
 			$data['data_user'] = $this->session->userdata()['logged_in'];
@@ -403,11 +423,12 @@ class Login extends CI_Controller {
 					'id' => $this->input->post('id'),
 					'password' => $this->input->post('password')
 					);
+
 				$result = $this->login_database->change_password($data_send);
 				if(!$result){
 					$data['msg_db'] = "¡ERROR!: ID erronea.";
 
-				$this->load->view('header');
+					$this->load->view('header');
 					switch($this->session->userdata['logged_in']['role']){
 						case 'admin':{
 							$this->load->view('admin_bars');

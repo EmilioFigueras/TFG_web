@@ -68,12 +68,13 @@ class Admincustomer_controller extends CI_Controller {
 	public function new_user_registration(){
 		//Validamos usuario y contraseña
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]');
 		if ($this->form_validation->run() == FALSE) {
+			$data['msg_db'] = 'Error en el formulario';
 			$this->load->view('header');
 			$this->load->view('admin_customer_bars');
-			$this->load->view('user_registration_form');
+			$this->load->view('user_registration_form', $data);
 			$this->load->view('footer');
 		} else {
 			$data = array(
@@ -147,9 +148,15 @@ class Admincustomer_controller extends CI_Controller {
 	//Modificar el password de un usuario
 	public function edit_password(){
 		$this->form_validation->set_rules('id', 'Id', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length[6]');
 		if ($this->form_validation->run() == FALSE) {
-			redirect('login', 'refresh');
+			$data['all_active_users'] = $this->admincustomer_database->all_active_users();
+			$data['msg_db'] = "Error en el formulario.";
+
+			$this->load->view('header');
+			$this->load->view('admin_customer_bars');
+			$this->load->view('admin_customer_page', $data);
+			$this->load->view('footer');
 		}
 		else{
 			$data = array(

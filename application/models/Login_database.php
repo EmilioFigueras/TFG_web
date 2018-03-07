@@ -49,7 +49,7 @@
 		//Datos del usuario
 		public function read_user_information($username) {
 			$condition = "username =" . "'" . $username . "'";
-			$this->db->select('*');
+			$this->db->select('users.*, roles.rolename');
 			$this->db->from('users');
 			$this->db->where($condition);
 			$this->db->join('roles', 'users.role = roles.id');
