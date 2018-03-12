@@ -3,6 +3,11 @@
 					<div class="sign-up">
 						<?php echo form_open('admin_controller/new_admin_registration'); ?>
 						<h3>Formulario de registro</h3>
+						<?php
+						if(!empty($msg_db)){
+							echo "<div class='alert alert-danger' role='alert'>".$msg_db."</div>";
+						}
+						?>
 						<p class="creating">Crear un nuevo administrador global de la aplicación web.</p>
 						<h5>Datos del usuario</h5>
 						<div class="sign-u">
