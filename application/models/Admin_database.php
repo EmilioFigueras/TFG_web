@@ -36,8 +36,14 @@
 			$this->db->query($query_createdb);
 			$query_createuser = "CREATE USER '".$data['name_db']."_user'@'localhost' identified by '".$password."';";
 			$this->db->query($query_createuser);
-			$query_grant = "GRANT ALL PRIVILEGES ON ".$data['name_db'].".* TO ".$data['name_db']."_user@localhost;";
+			$query_grant = "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON ".$data['name_db'].".* TO ".$data['name_db']."_user@localhost;";
 			$this->db->query($query_grant);
+
+
+			//Damos privilegios al usuario generico para la base de datos creada
+			$this->personal_db = $this->load->database('personal', TRUE);
+			$query_grant_personal = "GRANT SELECT, INSERT, UPDATE, DELETE ON ".$data['name_db'].".* TO ".$this->personal_db->username."@localhost;";
+			$this->db->query($query_grant_personal);
 
 
 			//Comprobamos si el nombre de la base de datos existe

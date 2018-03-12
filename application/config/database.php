@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 $ci = get_instance();
  if (!isset($ci->session->userdata['logged_in']['name_db'])){
-      $personal_db = 'none';
+      $personal_db = '';
  }else{
  	$personal_db = $ci->session->userdata['logged_in']['name_db'];
  }
@@ -110,7 +110,7 @@ $db['personal'] = array(
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => TRUE,
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
