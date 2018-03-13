@@ -34,9 +34,9 @@
 			//Creamos la base de datos
 			$query_createdb = "CREATE DATABASE ".$data['name_db']." CHARACTER SET utf8 COLLATE utf8_general_ci;";
 			$this->db->query($query_createdb);
-			$query_createuser = "CREATE USER '".$data['name_db']."_user'@'localhost' identified by '".$password."';";
+			$query_createuser = "CREATE USER 'u".$data['name_db']."'@'localhost' identified by '".$password."';";
 			$this->db->query($query_createuser);
-			$query_grant = "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON ".$data['name_db'].".* TO ".$data['name_db']."_user@localhost;";
+			$query_grant = "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON ".$data['name_db'].".* TO u".$data['name_db']."@localhost;";
 			$this->db->query($query_grant);
 
 

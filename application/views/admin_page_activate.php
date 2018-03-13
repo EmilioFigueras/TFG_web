@@ -44,7 +44,7 @@
 					<div class="form-group">
 						<label for="focusedinput" class="col-sm-2 control-label">Base de datos</label>
 						<div class="col-sm-8">
-							<input type="text" name="database_name" class="form-control1" id="focusedinput" placeholder="Nombre de la base de datos ya creada">
+							<input type="text" name="database_name" class="form-control1" id="focusedinput" placeholder="Nombre de la base de datos (máximo 15 caracteres)">
 							<input type="hidden" name="id" value="<?=$data_user->id?>">
 						</div>
 						<div class="col-sm-2 jlkdfj1">

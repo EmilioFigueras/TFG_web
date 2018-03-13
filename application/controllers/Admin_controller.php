@@ -31,9 +31,15 @@ class Admin_controller extends CI_Controller {
 	//Activar usuario
 	public function activate_user(){
 		$this->form_validation->set_rules('id', 'Id', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('database_name', 'Database_name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('database_name', 'Database_name', 'trim|required|xss_clean|max_length[15]');
 		if ($this->form_validation->run() == FALSE) {
-			redirect('login', 'refresh');
+			$data['inactive_admin_client_users'] = $this->admin_database->inactive_admin_client_users();
+			$data['msg_db'] = "Error al crear la base de datos.";
+
+			$this->load->view('header');
+			$this->load->view('admin_bars');
+			$this->load->view('admin_page', $data);
+			$this->load->view('footer');
 		}
 		else{
 			$data = array(
@@ -82,7 +88,7 @@ class Admin_controller extends CI_Controller {
 					<body> 
 					<h1>La base de datos ha sido activada</h1> 
 					<p> 
-					<b>El nombre de usuario es ".$data['name_db']."_user y la contraseña es ".$password.".
+					<b>El nombre de usuario es u".$data['name_db']." y la contraseña es ".$password.".
 					</p> 
 					</body> 
 					</html> 
