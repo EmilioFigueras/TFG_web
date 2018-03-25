@@ -674,7 +674,7 @@ div#page-wrapper {
 .custom-nav > li > a:hover,
 .custom-nav > li > a:active {
     background-color: #353f4f;
-    color:#8BC34A;
+    color:#42C920;
     border-radius: 0;
     -webkit-border-radius: 0;
 }
@@ -689,7 +689,7 @@ div#page-wrapper {
 
 .custom-nav > li.nav-active > a {
     background-color:#353f4f;
-    color:#8BC34A;
+    color:#42C920;
 }
 
 .custom-nav > li.nav-active > ul{
@@ -704,7 +704,7 @@ div#page-wrapper {
 .custom-nav > li.active > a:hover,
 .custom-nav > li.active > a:focus {
     background-color: #353f4f;
-    color:#8BC34A;
+    color:#42C920;
 }
 
 ul.dropdown-menu.drp-mnu li {
@@ -855,7 +855,7 @@ h5.left-nav-title {
 
 .left-side-collapsed .custom-nav li a span {
     position: absolute;
-    background:#8BC34A;
+    background:#42C920;
     padding: 11.7px;
     left: 52px;
     top: 1px;
@@ -876,7 +876,7 @@ h5.left-nav-title {
     position: absolute;
     pointer-events: none;
     border-color: rgba(0, 0, 0, 0);
-    border-right-color:#8BC34A;
+    border-right-color:#42C920;
     border-width: 6px;
     margin-top: -6px;
 }
@@ -899,7 +899,7 @@ h5.left-nav-title {
 .left-side-collapsed .custom-nav > li.nav-hover > a,
 .left-side-collapsed .custom-nav > li.nav-hover.active > a {
     background:#353f4f;
-    color:#8BC34A;
+    color:#42C920;
 }
 
 .left-side-collapsed .custom-nav li.nav-hover a span {
@@ -908,7 +908,7 @@ h5.left-nav-title {
 }
 
 .left-side-collapsed .custom-nav li.nav-hover.active a span {
-    background:#8BC34A;
+    background:#42C920;
     color: #fff;
 }
 
@@ -1030,7 +1030,7 @@ ul.nav li a span {
     left: 0;
     width: 200px;
     z-index: 100;
-    background: #8BC34A;
+    background: #42C920;
     border-bottom: 1px solid #303B4D;
     text-align: center;
     padding:0.55em 0 1em;
@@ -1244,11 +1244,11 @@ ul.dropdown-menu li {
 	margin-left:0;
 }
 .active a i,.act a i {
-    color:#8BC34A;
+    color:#42C920;
 }
 .custom-nav > li.act > a, .custom-nav > li.act > a:hover, .custom-nav > li.act > a:focus {
     background-color: #353f4f;
-    color:#8BC34A;
+    color:#42C920;
 }
 .user-panel-top li a{
 	display: block;
@@ -1921,7 +1921,7 @@ i.pull-left.fa.fa-bolt.icon-rounded {
 	position: absolute;
     top:47%;
     left:35%;
-    background:#8BC34A;
+    background:#42C920;
     width: 95px;
     height: 30px;
     padding: .4em 0 0;
@@ -2588,7 +2588,7 @@ h4.asd label {
     font-size: 3.5em;
 }
 .r3_counter_box .fa-mail-forward{
-	color:#8BC34A;
+	color:#42C920;
 }
 .r3_counter_box .fa-users {
 	color:#00BCD4;
@@ -2677,7 +2677,7 @@ i.dollar1{
 }
 .com-mail input[type="submit"]{
 	border: none;
-    background-color:#8BC34A;
+    background-color:#42C920;
     color: #fff;
     margin-bottom: 0;
     font-size: 14px;
@@ -2729,7 +2729,7 @@ canvas#doughnut, canvas#line, canvas#polarArea, #bar, #pie, #radar{
 	padding-left:.5em;
 }
 #os-Win-lbl {
-    border-left:#8BC34A solid 1em;
+    border-left:#42C920 solid 1em;
     padding-left: .5em;
 	font-size: 1em;
     color: #777F8C;
@@ -2797,8 +2797,8 @@ canvas#doughnut, canvas#line, canvas#polarArea, #bar, #pie, #radar{
   border-color:rgb(3, 197, 135);
 }
 .btn-success:hover{
-    border-color: #8BC34A !important;
-    background: #8BC34A !important;
+    border-color: #42C920 !important;
+    background: #42C920 !important;
 }
 .control2{
   height:253px;
@@ -2936,7 +2936,7 @@ span.badge1 {
   background-color: #03a9f4 !important;
 }
 .badge-success {
-  background-color: #8bc34a !important;
+  background-color: #42C920 !important;
 }
 .badge-warning {
   background-color: #ffc107 !important;
@@ -2976,8 +2976,8 @@ span.badge1 {
 	padding: 6px 10px;
 }
 .btn-primary:hover{
-	background-color: #8BC34A !important;
-    border-color: #8BC34A !important;
+	background-color: #42C920 !important;
+    border-color: #42C920 !important;
     color: #fff !important;
 }
 .caret {
@@ -3213,7 +3213,7 @@ span.badge {
 	font-size: 11px;
     font-weight: bold;
     color: #FFF;
-    background:#8BC34A;
+    background:#42C920;
     line-height: 15px;
     width: 20px;
     height: 20px;
@@ -3794,7 +3794,7 @@ h3.count.text-light {
   float: left;
 }
 label.round {
-  background:#8BC34A;
+  background:#42C920;
   width: 10px;
   height: 10px;
   display: block;
@@ -4699,7 +4699,7 @@ span.badge1 {
 	text-decoration:none;
 }
 .sign-in-form-top p span{
-	color:#8BC34A;
+	color:#42c920;
 }
 .signin {
     padding: 2em;
@@ -4838,7 +4838,7 @@ span.checkbox2 {
 	cursor:pointer;
 }
 .sign-in-form input[type="submit"]:hover {
-	 background:#8BC34A;
+	 background:#42C920;
 	 transition: 0.5s all;
   -webkit-transition: 0.5s all;
   -moz-transition: 0.5s all;
@@ -4997,7 +4997,7 @@ p.creating{
   font-size: 25px;
 }
 .error-btn a:hover{
-	color:#8BC34A;
+	color:#42C920;
 	text-decoration:underline;
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
@@ -5006,7 +5006,7 @@ p.creating{
 	-ms-transition: 0.5s all ease;
 }
 .error-main h3 i {
-    color: #8BC34A;
+    color: #42C920;
 }
 /*--404-ends-here--*/
 .dropdown-menu-right {

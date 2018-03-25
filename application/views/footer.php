@@ -1,6 +1,6 @@
 		<!--footer section start-->
 			<footer>
-			   <p>&copy 2017 Todos los derechos reservados | Diseño basado en <a href="https://w3layouts.com/" target="_blank">w3layouts.</a></p>
+			   <p>&copy <?php echo date('Y'); ?> Todos los derechos reservados | Diseño basado en <a href="https://w3layouts.com/" target="_blank">w3layouts.</a></p>
 			</footer>
         <!--footer section end-->
 	</section>

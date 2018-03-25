@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://'.gethostbyname($_SERVER['SERVER_NAME']).'/tfg/';
+$config['base_url'] = 'http://'.gethostbyname($_SERVER['SERVER_NAME']).'/wid_web/';
 
 /*
 |--------------------------------------------------------------------------
